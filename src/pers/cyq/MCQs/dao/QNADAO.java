@@ -20,7 +20,7 @@ import pers.cyq.MCQs.Constants;
  * @author cyq
  * @Project: MCQs 
  * @Date: May 20, 2019
- * <p>Description: add,update,delete,query </p>
+ * <p>Description: toolkits used to interfere with local databases</p>
  */
 public class QNADAO {
 	private DbUtil db=DbUtil.getDbUtil();
