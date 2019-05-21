@@ -52,6 +52,7 @@ public class QNAView extends JFrame{
 	
 	private void init(Constants.Level level, Constants.Attempt apt) {
 		
+		score=index=0;
 		//north panel
 		northPnl=new JPanel();
 		curQuesLbl=new JLabel();		
@@ -169,6 +170,7 @@ public class QNAView extends JFrame{
 						
 						if(strBtn.equals(curAns)) scoreadd();
 						if(index+1<qnalen) OneChoice(index+1);
+						else finishQandA(Constants.Attempt.ONE);
 					}
 				});
 			}
@@ -196,6 +198,7 @@ public class QNAView extends JFrame{
 						scoreadd(turn);
 						if(index+1<qnalen) 
 							TwoChoice(index+1, Constants.Turn.FIRST);
+						else finishQandA(Constants.Attempt.TWO);
 					}
 					else if(turn == Constants.Turn.FIRST) {
 						TwoChoice(index, Constants.Turn.SECOND);
@@ -204,8 +207,15 @@ public class QNAView extends JFrame{
 						curAnsLbl.setText(Constants.QVIEW_JLABEL_ANS+curAns);
 						TwoChoice(index+1, Constants.Turn.FIRST);
 					}
+					else finishQandA(Constants.Attempt.TWO);
 				}
 			});
 		}
+	}
+	
+	private void finishQandA(Constants.Attempt apt) {
+			if(apt == Constants.Attempt.TWO) new FinalView(score,increment*qnalen*2);
+			else new FinalView(score,increment*qnalen);
+			dispose();
 	}
 }

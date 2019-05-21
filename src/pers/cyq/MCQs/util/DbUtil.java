@@ -13,7 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 
 import pers.cyq.MCQs.Constants;
 
@@ -26,13 +26,14 @@ import pers.cyq.MCQs.Constants;
  */
 public class DbUtil {
 	private static DbUtil db;
+	private PropertiesUtils pu=PropertiesUtils.getProperUtil(Constants.CFG_NAME);
 	private Connection conn;
 	private PreparedStatement ps;
 	private ResultSet rs;
 
 	public static DbUtil getDbUtil() {
 		if (db == null) {
-			db = new DbUtil();
+			db = new DbUtil(); 
 		}
 		return db;
 	}
@@ -50,6 +51,25 @@ public class DbUtil {
 		return rs;
 	}
 	
+	public boolean execute(String sql) {
+		if (getCon() == null) {
+			return false;
+		}
+		try {
+			Statement statement = conn.createStatement();
+			statement.execute(sql);
+			statement.close();
+			return true;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false; 
+		}
+	}
+	
+	public boolean checkinit(){
+		return execute("select * from easyquestions");
+	}
 	/**
 	 * get database connection
 	 * @return
@@ -58,8 +78,8 @@ public class DbUtil {
 	public Connection getCon(){
 		try{
 			if (conn == null || conn.isClosed()){
-				Class.forName(Constants.DB_DRIVER);
-				conn=DriverManager.getConnection(Constants.DB_URL,Constants.DB_USERNAME,Constants.DB_PASSWORD);
+				Class.forName(pu.getDriverName());
+				conn=DriverManager.getConnection(pu.getDbUrl(),pu.getDbUsr(),pu.getDbPassWord());
 			}
 		}catch (ClassNotFoundException e) {
 			System.out.println("jdbc driver is not found.");

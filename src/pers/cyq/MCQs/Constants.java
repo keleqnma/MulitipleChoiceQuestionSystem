@@ -20,11 +20,16 @@ public interface Constants {
 	String TITLE = " Multiple Choice Question ";
 	
 	//JDBC
+	String CFG_NAME="MCQcfg.properties";
+	
+	/*
+	 * 
 	String DB_URL="jdbc:mysql://localhost:3306/qna?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false"; 
 		//prevent unrecognizable characters.
 	String DB_USERNAME="root"; 
 	String DB_PASSWORD="Cyq@65536"; 
 	String DB_DRIVER="com.mysql.cj.jdbc.Driver"; 
+	*/
 	
 	
 	//level view
@@ -56,4 +61,10 @@ public interface Constants {
 	public enum Turn{
 		FIRST,SECOND
 	}
+	
+	//final view
+	String FVIEW_CON_JLABEL="Congratulations! You have finished all the questions.";
+	String FVIEW_SCO_JLABEL="You had got: ";
+	String FVIEW_PARAM_AGAIN="Another Game.";
+	String FVIEW_PARAM_FIN="Game Over.";
 }
