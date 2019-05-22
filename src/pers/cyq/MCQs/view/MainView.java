@@ -1,10 +1,10 @@
 /**
  * @Project: MCQs 
- * @File: Main.java 
- * @Date: May 20, 2019
+ * @File: MainView.java 
+ * @Date: May 22, 2019
  * @Author <a href="mail to: cyq65536@gmail.com" rel="nofollow">Yuqi Chen</a>
  * @Version v1.0
- * <p>Description: [//todo] </p>
+ * <p>Description: the main function to start.</p>
  */
 package pers.cyq.MCQs.view;
 
@@ -15,14 +15,21 @@ import javax.swing.UIManager;
 
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 import pers.cyq.MCQs.util.DbUtil;
+
+
 /**
+ * The Class MainView.
+ *
  * @author cyq
- * @Project: MCQs 
+ * @Project: MCQs
  * @Date: May 20, 2019
  * <p>Description: [//TODO] </p>
  */
 public class MainView {
 	
+	/**
+	 * Database init.
+	 */
 	static void dbinit(){
 		DbUtil dbUtil=DbUtil.getDbUtil();
 		
@@ -30,6 +37,7 @@ public class MainView {
 		if(dbUtil.checkinit()) return;
 		
 		//initialize database
+		//insert test data
 		//easy
 		dbUtil.execute("CREATE TABLE `easyquestions` if not exists (`id` int(255) NOT NULL, `question` varchar(255), `answer` varchar(255),`options` varchar(255))");
 		dbUtil.execute("INSERT INTO `easyquestions` VALUES (1, 'What is the capital of France?', 'Paris', 'Paris,Beijing,London,Rio')");
@@ -56,6 +64,9 @@ public class MainView {
 		
 	}
 	
+	/**
+	 * Show(package BeautyEye)init.
+	 */
 	static void showinit() {
 		 try
 		    {
@@ -72,14 +83,22 @@ public class MainView {
 		    }
 	}
 	
+	/**
+	 * Check the environment for the package "BeautyEye" , which requires jdk1.6, jdk1.7 or jdk1.8.
+	 *
+	 * @return true, if successful
+	 */
 	static boolean checkenv() {
 		String jdkVersion = System.getProperty("java.version");
 		return (jdkVersion.matches("1.[678](.*)"));//1.8.0_112
-		//the package "Beautyeye" requires jdk1.6, jdk1.7 or jdk1.8
 	}
+	
 	/**
-	 * @throws SQLException 
-	 * @Title£∫main
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws SQLException the SQL exception
+	 * @Title£∫main 
 	 * @Description: [π¶ƒ‹√Ë ˆ]
 	 * @Param: @param args
 	 * @Return: void
@@ -99,6 +118,7 @@ public class MainView {
 				}
 			}
 		});
+		
 		DbUtil.getDbUtil().closeCon();
 		
 	}

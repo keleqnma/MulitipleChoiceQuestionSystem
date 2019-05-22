@@ -1,10 +1,10 @@
 /**
  * @Project: MCQs 
- * @File: MainView.java 
- * @Date: May 19, 2019
+ * @File: LevelView.java 
+ * @Date: May 22, 2019
  * @Author <a href="mail to: cyq65536@gmail.com" rel="nofollow">Yuqi Chen</a>
  * @Version v1.0
- * <p>Description: [//todo] </p>
+ * <p>Description: The second view for user to choose their difficulty level. </p>
  */
 package pers.cyq.MCQs.view;
 
@@ -21,23 +21,41 @@ import javax.swing.JPanel;
 import pers.cyq.MCQs.Constants;
 
 /**
+ * The Class LevelView.
+ *
  * @author cyq
- * @Project: MCQs 
+ * @Project: MCQs
  * @Date: May 19, 2019
- * <p>Description: The first view to choose the level </p>
+ * <p>Description: The second view to choose the level </p>
  */
 public class LevelView extends JFrame{
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -758905445128070716L;
 	
+	/** The frame has 2 panels. */
 	private JPanel northPnl,centerPnl;
+	
+	/** The different buttons show different difficulty, and the different scores users get. */
 	private JButton easyBtn,mediBtn,diffBtn;
+	
+	/** The label shows the choose informations. */
 	private JLabel choseLbl;
 	
+	/**
+	 * Instantiates a new level view.
+	 *
+	 * @param apt the apt
+	 */
 	public LevelView(Constants.Attempt apt) {
 		init(apt);
 	}
 	
+	/**
+	 * private Init method.
+	 *
+	 * @param apt the attempt of one or two chances for users to answer.
+	 */
 	private void init(Constants.Attempt apt) {
 				
 		//north panel

@@ -1,10 +1,10 @@
 /**
  * @Project: MCQs 
  * @File: FinalView.java 
- * @Date: May 21, 2019
+ * @Date: May 22, 2019
  * @Author <a href="mail to: cyq65536@gmail.com" rel="nofollow">Yuqi Chen</a>
  * @Version v1.0
- * <p>Description: [//todo] </p>
+ * <p>Description: the last view. </p>
  */
 package pers.cyq.MCQs.view;
 
@@ -21,25 +21,45 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import pers.cyq.MCQs.Constants;
+
+
 /**
+ * The Class FinalView.
+ *
  * @author cyq
- * @Project: MCQs 
+ * @Project: MCQs
  * @Date: May 21, 2019
  * <p>Description: [//todo] </p>
  */
 public class FinalView extends JFrame{
 	
+	/** The frame has 2 panels. */
 	private JPanel centerPnl,northPnl;
+	
+	/** The button to finish the test, or to restart . */
 	private JButton finishBtn,againBtn;
+	
+	/** The label shows congratulations to users, and the label shows the acore. */
 	private JLabel ConLbl,ScoreLbl;
+	
+	/** The mark users got and the full mark. */
 	private int usrMark,fullMark;
 	
+	/**
+	 * Instantiates a new final view.
+	 *
+	 * @param usrMark the user mark
+	 * @param fullMark the full mark
+	 */
 	public FinalView(int usrMark,int fullMark) {
 		this.usrMark=usrMark;
 		this.fullMark=fullMark;
 		init();
 	}
 	
+	/**
+	 * private Init method.
+	 */
 	private void init() {
 		
 		northPnl=new JPanel();

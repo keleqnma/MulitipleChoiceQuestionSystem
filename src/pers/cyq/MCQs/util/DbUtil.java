@@ -1,10 +1,10 @@
 /**
  * @Project: MCQs 
  * @File: DbUtil.java 
- * @Date: May 20, 2019
+ * @Date: May 22, 2019
  * @Author <a href="mail to: cyq65536@gmail.com" rel="nofollow">Yuqi Chen</a>
  * @Version v1.0
- * <p>Description:databse tools</p>
+ * <p>Description: database utilizers </p>
  */
 package pers.cyq.MCQs.util;
 
@@ -17,20 +17,36 @@ import java.sql.Statement;
 
 import pers.cyq.MCQs.Constants;
 
-
 /**
+ * The Class DbUtil.
+ *
  * @author cyq
- * @Project: MCQs 
+ * @Project: MCQs
  * @Date: May 20, 2019
  * <p>Description: database utilizers</p>
  */
 public class DbUtil {
+	
+	/** The database utilizers. */
 	private static DbUtil db;
+	
+	/** The Properties utilizers. */
 	private PropertiesUtils pu=PropertiesUtils.getProperUtil(Constants.CFG_NAME);
+	
+	/** The database connection. */
 	private Connection conn;
+	
+	/** The PreparedStatement. */
 	private PreparedStatement ps;
+	
+	/** The result set. */
 	private ResultSet rs;
 
+	/**
+	 * Gets the database utilizers, avoid the overlap.
+	 *
+	 * @return the database utilizers
+	 */
 	public static DbUtil getDbUtil() {
 		if (db == null) {
 			db = new DbUtil(); 
@@ -38,6 +54,12 @@ public class DbUtil {
 		return db;
 	}
 	
+	/**
+	 * Execute query.
+	 *
+	 * @param sql the SQL statement
+	 * @return the result set
+	 */
 	public ResultSet executeQuery(String sql)  {
 		if (getCon() == null) {
 			return null;
@@ -51,6 +73,12 @@ public class DbUtil {
 		return rs;
 	}
 	
+	/**
+	 * Execute the SQL statement.
+	 *
+	 * @param sql the SQL statement
+	 * @return true, if successful
+	 */
 	public boolean execute(String sql) {
 		if (getCon() == null) {
 			return false;
@@ -67,13 +95,19 @@ public class DbUtil {
 		}
 	}
 	
+	/**
+	 * Check the database initialization.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean checkinit(){
 		return execute("select * from easyquestions");
 	}
+	
 	/**
-	 * get database connection
-	 * @return
-	 * @throws Exception
+	 * get database connection.
+	 *
+	 * @return the con
 	 */
 	public Connection getCon(){
 		try{
@@ -91,9 +125,7 @@ public class DbUtil {
 	}
 	
 	/**
-	 * close database connection
-	 * @param con
-	 * @throws Exception
+	 * close database connection.
 	 */
 	public void closeCon(){
 		try {
@@ -111,6 +143,7 @@ public class DbUtil {
 		}
 	}
 	
+	//test connection
 	/*
 	public static void main(String[] args) {
 		DbUtil dbUtil=getDbUtil();

@@ -4,7 +4,7 @@
  * @Date: May 20, 2019
  * @Author <a href="mail to: cyq65536@gmail.com" rel="nofollow">Yuqi Chen</a>
  * @Version v1.0
- * <p>Description: [//todo] </p>
+ * <p>Description:the details of the questions </p>
  */
 package pers.cyq.MCQs.model;
 

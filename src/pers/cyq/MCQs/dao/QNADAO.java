@@ -1,10 +1,10 @@
 /**
  * @Project: MCQs 
  * @File: QNADAO.java 
- * @Date: May 20, 2019
+ * @Date: May 22, 2019
  * @Author <a href="mail to: cyq65536@gmail.com" rel="nofollow">Yuqi Chen</a>
  * @Version v1.0
- * <p>Description: [//todo] </p>
+ * <p>Description: Database Access Object, toolkits used to interfere with local databases</p>
  */
 package pers.cyq.MCQs.dao;
 
@@ -17,16 +17,29 @@ import pers.cyq.MCQs.util.*;
 import pers.cyq.MCQs.Constants;
 
 /**
+ * The Class QNADAO.
+ *
  * @author cyq
- * @Project: MCQs 
+ * @Project: MCQs
  * @Date: May 20, 2019
  * <p>Description: toolkits used to interfere with local databases</p>
  */
 public class QNADAO {
+	
+	/** The database utilizers. */
 	private DbUtil db=DbUtil.getDbUtil();
+	
+	/** The resultSet. */
 	private ResultSet rs;
+	
+	/** The qna database access object. */
 	private static QNADAO qd=null;
 	
+	/**
+	 * Gets the single instance of QNADAO.
+	 *
+	 * @return single instance of QNADAO
+	 */
 	public static synchronized QNADAO getInstance() {
 		if (qd == null) {
 			qd = new QNADAO();
@@ -34,6 +47,9 @@ public class QNADAO {
 		return qd;
 	}
 	
+	/**
+	 * Destroy.
+	 */
 	private void destroy() {
 		try {
 			if (rs != null) {
@@ -43,38 +59,13 @@ public class QNADAO {
 			se.printStackTrace();
 		}
 	}
+	
 	/**
-	 * add questions 
-	 * @param con
-	 * @param book
-	 * @return
-	 * @throws Exception
-	public boolean add(QNA qna,Constants.Level level)throws Exception{
-		boolean result = false;
-		if(qna==null) return result;
-		String sql;
-		switch(level){
-		case EASY:
-			sql="insert into easyquestions values(?,?,?,?)";
-			break;
-		case MEDI:
-			sql="insert into mediquestions values(?,?,?,?)";
-			break;
-		case DIFF:
-			sql="insert into diffquestions values(?,?,?,?)";
-			break;
-		default:
-			throw new IllegalArgumentException();
-		}
-		
-		PreparedStatement pstmt=con.prepareStatement(sql);
-		pstmt.setInt(1, qna.getId());
-		pstmt.setString(2, qna.getQuestion());
-		pstmt.setString(3, qna.getAnswer());
-		pstmt.setString(4, StringUtil.AtoS(qna.getOptions()));
-		return result;
-	}
-	*/
+	 * list questions .
+	 *
+	 * @param level the level
+	 * @return the array list
+	 */
 	
 	public ArrayList<QNA> list(Constants.Level level){
 		String sql;
@@ -109,6 +100,14 @@ public class QNADAO {
 			return result;
 	}
 	
+	/**
+	 * Builds the array lists from the result set.
+	 *
+	 * @param rs the result set
+	 * @param list the array lists
+	 * @param i the index
+	 * @throws SQLException the SQL exception
+	 */
 	private void buildList(ResultSet rs, ArrayList<QNA> list, int i) throws SQLException {
 		QNA qna = new QNA();
 		qna.setId(rs.getInt("id"));

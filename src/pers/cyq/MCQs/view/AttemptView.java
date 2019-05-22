@@ -1,10 +1,10 @@
 /**
  * @Project: MCQs 
  * @File: AttemptView.java 
- * @Date: May 20, 2019
+ * @Date: May 22, 2019
  * @Author <a href="mail to: cyq65536@gmail.com" rel="nofollow">Yuqi Chen</a>
  * @Version v1.0
- * <p>Description: [//todo] </p>
+ * <p>Description: The first view for user to choose their attempt.</p>
  */
 package pers.cyq.MCQs.view;
 
@@ -19,24 +19,39 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import pers.cyq.MCQs.Constants;
+
 /**
+ * The Class AttemptView.
+ *
  * @author cyq
- * @Project: MCQs 
+ * @Project: MCQs
  * @Date: May 20, 2019
  * <p>Description: to choose attempt </p>
  */
 public class AttemptView extends JFrame{
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5311268218862568386L;
 	
+	/** The frame has 2 panels. */
 	private JPanel northPnl,centerPnl;
+	
+	/** The button shows that one or two chances for users to answer. */
 	private JButton oneBtn,twoBtn;
+	
+	/** The label shows the choose informations. */
 	private JLabel choseLbl;
 	
+	/**
+	 * Instantiates a new attempt view.
+	 */
 	public AttemptView() {
 		init();
 	}
 	
+	/**
+	 * private Init method.
+	 */
 	private void init() {
 		//north panel
 		northPnl=new JPanel();
