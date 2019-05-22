@@ -31,24 +31,24 @@ public class MainView {
 		
 		//initialize database
 		//easy
-		dbUtil.execute("CREATE TABLE `easyquestions`  (`id` int(255) NOT NULL, `question` varchar(255), `answer` varchar(255),`options` varchar(255))");
+		dbUtil.execute("CREATE TABLE `easyquestions` if not exists (`id` int(255) NOT NULL, `question` varchar(255), `answer` varchar(255),`options` varchar(255))");
 		dbUtil.execute("INSERT INTO `easyquestions` VALUES (1, 'What is the capital of France?', 'Paris', 'Paris,Beijing,London,Rio')");
 		dbUtil.execute("INSERT INTO `easyquestions` VALUES (2, 'What nationality was Newton?', 'English', 'English,Japanese,French,Chinese')");
 		dbUtil.execute("INSERT INTO `easyquestions` VALUES (3, 'What is the chemical symbol for hydrogen?', 'H', 'H,A,B,C');");
 		dbUtil.execute("INSERT INTO `easyquestions` VALUES (4, 'When did man land on the moon?', '1969', '1969,1066,1215,2001')");
-		dbUtil.execute("INSERT INTO `easyquestions` VALUES (5, 'Whats\'s the first name of \"Yuqi Chen\"?', 'Yuqi', 'Yuqi,Chen,Cen,Yui')");
+		dbUtil.execute("INSERT INTO `easyquestions` VALUES (5, 'Whats is the first name of Yuqi Chen?', 'Yuqi', 'Yuqi,Chen,Cen,Yui')");
 		
 		//medi
-		dbUtil.execute("CREATE TABLE `mediquestions`  (`id` int(255) NOT NULL, `question` varchar(255), `answer` varchar(255),`options` varchar(255))");
-		dbUtil.execute("INSERT INTO `mediquestions` VALUES (1, 'What\'s the name of first dog Yuqi Chen?', 'Robber', 'Cola,Coco,Robber,Pesi')");
+		dbUtil.execute("CREATE TABLE `mediquestions` if not exists (`id` int(255) NOT NULL, `question` varchar(255), `answer` varchar(255),`options` varchar(255))");
+		dbUtil.execute("INSERT INTO `mediquestions` VALUES (1, 'What is the name of first dog Yuqi Chen?', 'Robber', 'Cola,Coco,Robber,Pesi')");
 		dbUtil.execute("INSERT INTO `mediquestions` VALUES (2, 'Which is the biggest lake in China?', 'Dongting Lake', 'Qinghai Lake,Poyang Lake,Hongze Lake,Dongting Lake')");
 		dbUtil.execute("INSERT INTO `mediquestions` VALUES (3, 'When is the World Water Day?', 'March 23rd', 'April 1st,March 23rd, June 22nd,July 1st')");
 		dbUtil.execute("INSERT INTO `mediquestions` VALUES (4, 'What diseases does a low-salt diet help prevent?', 'hypertension', 'hepatitis B,diabetes mellitus,hypertension,anemia')");
 		dbUtil.execute("INSERT INTO `mediquestions` VALUES (5, 'The shelf life of food refers to its:', 'Optimum consumption period', 'Date of production,Final consumption period,Optimum consumption period,Date of factory')");
 		
 		//difficult
-		dbUtil.execute("CREATE TABLE `diffquestions`  (`id` int(255) NOT NULL, `question` varchar(255), `answer` varchar(255),`options` varchar(255))");
-		dbUtil.execute("INSERT INTO `diffquestions` VALUES (1, 'Whats\'s the last name of \"Yuqi Chen\"?', 'Chen', 'Yuqi,Chen,Yui,Cen')");
+		dbUtil.execute("CREATE TABLE `diffquestions` if not exists (`id` int(255) NOT NULL, `question` varchar(255), `answer` varchar(255),`options` varchar(255))");
+		dbUtil.execute("INSERT INTO `diffquestions` VALUES (1, 'Whats's the last name of Yuqi Chen?', 'Chen', 'Yuqi,Chen,Yui,Cen')");
 		dbUtil.execute("INSERT INTO `diffquestions` VALUES (2, 'Do not use any of the following foods for colds ', 'sea fish', 'soybean milk,sea fish,green vegetables,ginger')");
 		dbUtil.execute("INSERT INTO `diffquestions` VALUES (3, 'What are the nutritional contents of lemon juice?', 'vitamin A and vitamin C', 'vitamin A and vitamin C,vitamin B1 and vitamin C,vitamin C,vitamin B6')");
 		dbUtil.execute("INSERT INTO `diffquestions` VALUES (4, 'The trace elements in apples that enhance memory are', 'Zinc', 'Iron,Zinc,Calcium,Iodine')");
@@ -62,12 +62,20 @@ public class MainView {
 		        BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencyAppleLike;
 		        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
 		        UIManager.put("RootPane.setupButtonVisible", false);
+		        BeautyEyeLNFHelper.translucencyAtFrameInactive = false;
+		        
 		    }
 		    catch(Exception e)
 		    {
 		    	e.printStackTrace();
 		    	//TODO exception
 		    }
+	}
+	
+	static boolean checkenv() {
+		String jdkVersion = System.getProperty("java.version");
+		return (jdkVersion.matches("1.[678](.*)"));//1.8.0_112
+		//the package "Beautyeye" requires jdk1.6, jdk1.7 or jdk1.8
 	}
 	/**
 	 * @throws SQLException 
@@ -78,7 +86,7 @@ public class MainView {
 	 * @CreateDate: May 20, 2019 12:46:49 PM
 	 */
 	public static void main(String[] args) throws SQLException {
-		showinit();
+		if(checkenv()) showinit();
 		dbinit();
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -92,6 +100,7 @@ public class MainView {
 			}
 		});
 		DbUtil.getDbUtil().closeCon();
+		
 	}
 
 }
